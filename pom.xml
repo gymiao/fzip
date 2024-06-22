@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.gy</groupId>
+    <artifactId>fzip</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>fzip</name>
+    <description>fzip</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--    SpringWeb    -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 添加 Swagger 核心库依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version> <!-- 请检查并使用最新版本 -->
+        </dependency>
+
+        <!-- 添加 Swagger UI 依赖，用于生成美观的API文档界面 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version> <!-- 请检查并使用与上面一致的版本 -->
+        </dependency>
+
+        <!-- 文档相关 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
+        <!-- 工具类 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.18</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>enable-war-packaging</id>
+            <activation>
+                <property>
+                    <name>packaging</name>
+                    <value>war</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.uyoqu.framework</groupId>
+                        <artifactId>maven-plugin-starter</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>bin</goal>
+                                </goals>
+                                <configuration>
+                                    <jvms>
+                                        <jvm>-Djava.security.egd=file:/dev/./urandom</jvm>
+                                        <jvm>-Dfile.encoding=utf-8</jvm>
+                                        <jvm>-Djava.net.preferIPv4Stack=false</jvm>
+                                        <jvm>-Djava.net.preferIPv4Addresses=true</jvm>
+                                        <jvm>-Djava.awt.headless=true</jvm>
+                                    </jvms>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>enable-jar-packaging</id>
+            <activation>
+                <property>
+                    <name>packaging</name>
+                    <value>jar</value>
+                </property>
+            </activation>
+        </profile>
+    </profiles>
+
+</project>
